@@ -87,11 +87,11 @@ while True:
         src: 입력 이미지, 일반적으로 전경
         dst: 대상 이미지, 일반적으로 배경
         mask: 마스크, src에서 합성하고자 하는 영역은 255, 나머지는 0
-        coords: src가 놓이기 원하는 dst의 좌표 (중앙)
+        coords: 입력 이미지가 놓이기 원하는 배경 이미지의 좌표 (중앙)
         
         flags: 합성 방식 
-        입력 원본을 유지하는 cv2.NORMAL_CLONE
-        입력과 대상을 혼합하는 cv2.MIXED_CLONE
+        cv2.NORMAL_CLONE 입력 원본을 유지
+        cv2.MIXED_CLONE 입력과 대상을 혼합
         
         output(optional): 합성 결과
         """
