@@ -12,7 +12,7 @@ import numpy as np
 
 # orange 이미지
 orange_img = cv2.imread('orange.jpg')
-orange_img = cv2.resize(orange_img, dsize=(512,512))
+orange_img = cv2.resize(orange_img, dsize=(512, 512))
 
 # 얼굴 인식
 face_detector = dlib.get_frontal_face_detector()
@@ -34,7 +34,7 @@ while True:
     """
     ret, frame = webcam.read()
 
-    if not ret : # 비디오 프레임을 제대로 읽어오지 않으면 break
+    if not ret:  # 비디오 프레임을 제대로 읽어오지 않으면 break
         break
 
     # frame에서 얼굴들 인식
@@ -47,7 +47,7 @@ while True:
     webcam frame에서 사람의 눈과 입을 
     오렌지 이미지 위에 올리기!
     """
-    try :
+    try:
         face = faces[0]
 
         """
@@ -79,7 +79,9 @@ while True:
 
         left_eye_frame = frame[le_y1 - le_margin: le_y2 + le_margin,
                          le_x1 - le_margin: le_x2 + le_margin].copy()
+        # cv2.imshow("left_eye_frame1", left_eye_frame)
         left_eye_frame = resize(left_eye_frame, width=100)
+        # cv2.imshow("left_eye_frame2", left_eye_frame)
 
         """
         두 이미지 합성
@@ -87,12 +89,12 @@ while True:
         src: 입력 이미지, 일반적으로 전경
         dst: 대상 이미지, 일반적으로 배경
         mask: 마스크, src에서 합성하고자 하는 영역은 255, 나머지는 0
-        coords: 입력 이미지가 놓이기 원하는 배경 이미지의 좌표 (중앙)
-        
+        coords: src가 놓이기 원하는 dst의 좌표 (중앙)
+
         flags: 합성 방식 
-        cv2.NORMAL_CLONE 입력 원본을 유지
-        cv2.MIXED_CLONE 입력과 대상을 혼합
-        
+        입력 원본을 유지하는 cv2.NORMAL_CLONE
+        입력과 대상을 혼합하는 cv2.MIXED_CLONE
+
         output(optional): 합성 결과
         """
         result = cv2.seamlessClone(
@@ -110,8 +112,8 @@ while True:
         re_y1, re_y2 = shape[43, 1], shape[47, 1]
         re_margin = int((re_x2 - re_x1) * 0.18)
 
-        right_eye_frame = frame[re_y1 - re_margin : re_y2 + re_margin ,
-                          re_x1 - re_margin : re_x2 + re_margin].copy()
+        right_eye_frame = frame[re_y1 - re_margin: re_y2 + re_margin,
+                          re_x1 - re_margin: re_x2 + re_margin].copy()
         right_eye_frame = resize(right_eye_frame, width=100)
 
         result = cv2.seamlessClone(
@@ -129,8 +131,8 @@ while True:
         mouth_y1, mouth_y2 = shape[50, 1], shape[57, 1]
         mouth_margin = int((mouth_x2 - mouth_x1) * 0.1)
 
-        mouth_frame = frame[mouth_y1 - mouth_margin : mouth_y2 + mouth_margin,
-                      mouth_x1 - mouth_margin : mouth_x2 + mouth_margin]
+        mouth_frame = frame[mouth_y1 - mouth_margin: mouth_y2 + mouth_margin,
+                      mouth_x1 - mouth_margin: mouth_x2 + mouth_margin]
         mouth_frame = resize(mouth_frame, width=250)
 
         result = cv2.seamlessClone(
@@ -143,7 +145,7 @@ while True:
 
         cv2.imshow("Annoying_you", result)
 
-    except :
+    except:
         pass
 
     # 키보드 esc 누르면 종료
@@ -154,6 +156,3 @@ while True:
 webcam.release()
 # 모든 윈도우 창을 닫는다.
 cv2.destroyAllWindows()
-
-
-
