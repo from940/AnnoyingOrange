@@ -18,7 +18,7 @@ face_detector = dlib.get_frontal_face_detector()
 
 # 68개 얼굴 점 파일 가져오기
 cwd = os.path.abspath(os.path.dirname(__file__))
-model_path = os.path.abspath(os.path.join(cwd, "shape_predictor_68_face_landmarks.dat"))
+model_path = os.path.abspath(os.path.join(cwd, "trained_models", "shape_predictor_68_face_landmarks.dat"))
 shape_predictor = dlib.shape_predictor(model_path)
 
 # 웹캠 카메라 정보를 받아옴
