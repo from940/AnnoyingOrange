@@ -75,6 +75,7 @@ while True:
         """
         le_x1, le_x2 = shape[36, 0], shape[39, 0]
         le_y1, le_y2 = shape[37, 1], shape[41, 1]
+
         le_margin = int((le_x2 - le_x1) * 0.18)
 
         left_eye_frame = frame[le_y1 - le_margin: le_y2 + le_margin,
